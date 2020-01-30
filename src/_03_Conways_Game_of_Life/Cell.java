@@ -20,6 +20,7 @@ public class Cell implements Drawable{
 	//11. Complete the liveOrDie method
 	//    It sets isAlive to true or false based on the neighbors and 
 	//the rules of the game
+	
 	/*
 	 * 1. Any live cell with fewer than two live neighbors dies, as if caused by underpopulation.
 	 * 2. Any live cell with two or three live neighbors lives on to the next generation.
@@ -28,8 +29,20 @@ public class Cell implements Drawable{
 	 * (source: Wikipedia)
 	 * */
 	
+	
 	public void liveOrDie(int numNeighbors) {
-		
+		if((isAlive == true)&&(numNeighbors<2)) {
+			isAlive=false;
+		}
+		if((isAlive==true)&&(numNeighbors == 2 || numNeighbors == 3)) {
+			isAlive=true;
+		}
+		if((isAlive==true)&&(numNeighbors>3)) {
+			isAlive=false;
+		}
+		if((isAlive==false)&&(numNeighbors==3)) {
+			isAlive=true;
+		}
 	}
 	
 	public int getX() {
@@ -45,11 +58,17 @@ public class Cell implements Drawable{
 	//    draws empty square if cell is dead
 	@Override
 	public void draw(Graphics g) {
-	
-		
-		
-		
-		
-		
+		if(isAlive == true) {
+			g.setColor(Color.black);
+			g.drawRect(x, y, cellSize, cellSize);
+			g.setColor(Color.blue);
+			g.fillRect(x, y, cellSize, cellSize);
+		}
+		if(isAlive == false) {
+			g.setColor(Color.black);
+			g.drawRect(x, y, cellSize, cellSize);
+			g.setColor(Color.white);
+			g.fillRect(x, y, cellSize, cellSize);
+		}
 	}
 }
